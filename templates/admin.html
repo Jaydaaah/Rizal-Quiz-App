@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body>
+    <h1>Admin</h1>
+    <hr>
+    <form action="/{{ adminlink }}" method="post">
+        <input type="checkbox" name="accept_answer" value="True" {% if is_checked %}checked{% endif %}>Accept answer</input><br>
+
+        <label for="cur_item">Current item quiz: </label>
+        <input type="number" id="cur_item" name="cur_item" value="{{ cur_num }}" required>
+        <br>
+
+        <label>Answer key: </label>
+        <label>
+            <input type="radio" name="ans_key" value="A" required {% if ans_key == "A" %}checked{% endif %}>
+            A   
+        </label>
+        <label>
+            <input type="radio" name="ans_key" value="B" required {% if ans_key == "B" %}checked{% endif %}>
+            B   
+        </label>
+        <label>
+            <input type="radio" name="ans_key" value="C" required {% if ans_key == "C" %}checked{% endif %}>
+            C   
+        </label>
+        <label>
+            <input type="radio" name="ans_key" value="D" required {% if ans_key == "D" %}checked{% endif %}>
+            D   
+        </label>
+        <br>
+
+        <input type="submit" value="Save">
+
+        <a href="/{{ adminlink }}">Cancel/Refresh</a>
+    </form>
+    <hr>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in data_dict.items() %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+</body>
+</html>

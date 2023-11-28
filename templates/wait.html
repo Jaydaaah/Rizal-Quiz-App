@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Get Ready</title>
+</head>
+<body>
+  <h1>Waiting for Question...</h1>
+  <script>
+    function checkForRedirect() {
+      fetch('/check_for_update', {
+        method: 'GET',
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.redirect) {
+          // Server sent a redirect command
+          window.location.href = data.redirect_url;
+        }
+      })
+      .catch(error => {
+        console.error('Error checking for updates:', error);
+      });
+    }
+
+    // Check for updates every 3 seconds
+    setInterval(checkForRedirect, 3000);
+  </script>
+</body>
+</html>
